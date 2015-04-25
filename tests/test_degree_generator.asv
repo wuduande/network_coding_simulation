@@ -1,0 +1,23 @@
+function [ output_args ] = test_degree_generator( input_args )
+%TEST_DEGREE_GENERATOR Summary of this function goes here
+%   Detailed explanation goes here
+global distribution nodeNum;
+nodeNum = 100;
+distribution = getDistribution( nodeNum,'robust_siliton' );
+
+= zeros(1,);
+end
+
+%以下待测试函数来源于system_init文件。
+function targetDegree = get_target_degree()
+    global distribution nodeNum;
+    rand_scalar = rand();
+    for indx = 1:nodeNum
+       if rand_scalar < distribution(indx)
+           targetDegree = indx;
+           break;
+       else
+           rand_scalar = rand_scalar - distribution(indx);
+       end
+    end
+end

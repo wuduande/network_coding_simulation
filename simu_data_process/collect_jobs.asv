@@ -1,0 +1,36 @@
+function ret = collect_jobs(  )
+%COLLECT_JOBS Summary of this function goes here
+%   Detailed explanation goes here
+global k;
+dgl = 'degree_limit_opt';
+rbst = 'robust_siliton';
+
+dgl_curve = get_cost_curve();
+end
+
+function init_job(nodeNum,dis_type,indx)
+global k;
+set_env(nodeNum,[]);
+k = 0.98*nodeNum;
+load_globals(nodeNum,dis_type,indx);
+end
+
+function ret = get_cost_curve(dis_type)
+    N = [50,100,200,300,400,500];
+    ret = zeros(size(N,2));
+    
+    for j = 1:size(N,2)
+        ret(j) = ave_N_type(N(j),dis_type);
+    end
+end
+
+function ret = ave_N_type(nodeNum,dis_type)
+    ret = 0;
+    for indx = 1:100
+        init_job(nodeNum,dis_type,indx);
+        for j = 1:10
+            ret = ret + sink_collect();
+        end
+    end
+    ret = ret/1000;
+end

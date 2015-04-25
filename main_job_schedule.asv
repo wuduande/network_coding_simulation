@@ -1,0 +1,9 @@
+%²¼ÖÃ×÷Òµ
+N = [100 200 300 400 500];
+tau = [];
+dg = [27  30 40 50];
+auto_simu_N(100,1,10,5);
+% auto_simu_N(200);
+% auto_simu_N(300);
+% auto_simu_N(400);
+% auto_simu_N(500);

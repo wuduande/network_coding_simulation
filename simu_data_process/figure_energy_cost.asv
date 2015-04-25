@@ -1,0 +1,38 @@
+%% figure_energy_cost: function description
+function figure_energy_cost(arg)
+    addpath('..\lib');
+	dgl_cost = zeros(5,951);
+	rbst_cost = zeros(1,951);
+    N_feild = 50:1000
+	for N = 50:1000;
+		for gamma = 4:8;
+			dgl_cost(gamma-3,N) = get_ddllt_cost_upper(N,gamma);
+		end
+		rbst_cost(N) = get_rbst_cost_lower(N);
+	end
+
+	figure(2);hold on;
+	plot(N,dgl_cost(1,:));
+    plot(N,dgl_cost(2,:));
+    plot(N,dgl_cost(3,:));
+    plot(N,dgl_cost(4,:));
+    plot(N,dgl_cost(5,:));
+	plot(N,rbst_cost,'r');
+end
+
+%% get_ddllt_cost: function description
+function [ret] = get_ddllt_cost_upper(N,gamma)
+	ret = gamma*log(N);
+end
+%% get_rbst_cost: function description
+function [ret] = get_rbst_cost_lower(N)
+	ret_part1 = log(N);
+
+	distribution = getDistribution(N,'robust_siliton');
+	ret_part2 = 0;
+	for degree = 1:N
+		ret_part2 = ret_part2 + degree*distribution(degree);
+	end
+
+	ret = ret_part1.*ret_part2;
+end

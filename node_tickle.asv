@@ -1,0 +1,108 @@
+function node_tickle( node_id )
+%NODE_STEP Summary of this function goes here
+%   Detailed explanation goes here
+if ~is_ok_to_send(node_id)
+    return;
+end
+
+nbor_id = choose_nbor(node_id);
+if ~is_nbor_ok()
+    return;
+end
+
+send_to_nbor(node_id,nbor_id);
+end
+%%
+function send_to_nbor(node_id,nbor_id)
+acquire_channel(node_id,nbor_id);
+pack = get_pack_to_send(node_id);
+process_income_pack(nbor_id,pack);
+end
+%%
+function acquire_channel(node_id,nbor_id)
+global nodeNum phyNBorMap nodes;
+%RTS/CTS信道申请
+for rts_cts_index = 1:nodeNum
+        %任一结点，如果在这RTS/CTS范围内，就要标志为忙，这个时隙内无法传输。
+    if phyNBorMap(node_id,rts_cts_index) > 0 || phyNBorMap(nbor_id,rts_cts_index) > 0
+        nodes(rts_cts_index).is_busy = 1;
+    end
+end
+end
+%%
+function pack = get_pack_to_send(node_id)
+global nodes;
+codeable_pack_num = ListSize(nodes(node_id).coding_mems);
+indx_rand = randi(codeable_pack_num)-1;
+list_node = ListRemove(nodes(node_id).coding_mems,indx_rand);%取出的是链表数据结构的一个结点
+pack = list_node.Data;
+end
+%%
+function process_income_pack(node_id,pack)
+    global nodes;
+    pack.left_hop = max(pack.left_hop - 1, 0);
+    
+    if is_pack_codeable(pack,node_id)
+        pack = encode_pack(pack,node_id);
+    end
+    
+    if is_pack_finished(pack)
+         ListInsert(nodes(node_id).code_finished_mems,dlnode(pack));
+    else
+        ListInsert(nodes(node_id).coding_mems,dlnode(pack));
+    end
+end
+%%
+function ret = is_pack_codeable(pack,node_id)
+ret = 1;
+if ~(pack.left_hop <= 0 && pack.coeffs(node_id) == int32(0))
+    ret = 0;
+    return;
+end
+end
+function pack = encode_pack(pack,node_id)
+global nodeNum;    
+    pack.coeffs(node_id) = int32(1);
+    pack.left_degree = pack.left_degree - 1;
+    pack.left_hop = log(nodeNum);
+end
+function ret = is_pack_finished(pack)
+    ret = pack.left_degree == 0;
+end
+function ret = is_channel_busy(node_id)
+global nodes;
+ret = nodes(node_id).is_busy;
+end
+function ret = has_no_pack_to_send(node_id)
+global nodes;
+coding_pack_list = nodes(node_id).coding_mems;
+ret = ListEmpty(coding_pack_list);
+end
+function ret = is_ok_to_send(node_id)
+global is_code_finished;
+    ret = 1;
+    if is_channel_busy(node_id)
+        ret = 0;
+        return;
+    end
+
+    if has_no_pack_to_send(node_id)
+        ret = 0;
+        return;
+    else
+        is_code_finished = 0;
+        return;
+    end
+end
+function ret = is_nbor_ok()
+ret = 1;
+if nbor_id == -1%没有邻结点
+    ret = 0;
+    return;
+end
+%信道检查
+if is_channel_busy(nbor_id)%邻结点忙
+    ret = 0;
+    return;
+end
+end
