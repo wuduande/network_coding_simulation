@@ -1,8 +1,8 @@
-function simu_context = system_init(simu_context)
+function simu_context = simu_init(simu_context,gen)
 %INIT_SIMU 为仿真系统初始化仿真场景。
 %  包括：结点结点数据、仿真系统所要用到地图。
 %初始化结点
-addpath('lib\data_structure');
+addpath('../../lib/data_structure');
 addpath('lib');
 %<global init>
 simu_context = put_nodes_in_grid(simu_context);
@@ -52,7 +52,7 @@ function simu_context = put_nodes_in_grid(simu_context)
         %--复制b个初始包，放入“未完成编码码包”链表中。
         list = doubleLinkedList();
         for counter=1:code_redundence
-            pack.left_degree = int32(get_target_degree(simu_context) - 1);%还需编入的符号分量数
+            pack.left_degree = int32(gen.next() - 1);%还需编入的符号分量数
             ListInsert(list, pack);
         end
         nodes(k).coding_mems = list;
@@ -65,41 +65,6 @@ function simu_context = put_nodes_in_grid(simu_context)
     end
     simu_context.nodes = nodes;
 end
-function targetDegree = get_target_degree(simu_context)
-    distribution = simu_context.distribution;
-    nodeNum = simu_context.nodeNum;
-
-    rand_scalar = rand();
-    for indx = 1:nodeNum
-       if rand_scalar < distribution(indx)
-           targetDegree = indx;
-           break;
-       else
-           rand_scalar = rand_scalar - distribution(indx);
-       end
-    end
-end
-%density: comRange^2*nodeNum/area
-% function init_nodes_random()
-% global nodes nodeNum density comRange nodeMemSize;
-% area_width = floor(sqrt(comRange.^2*nodeNum/density));
-% %id
-% %pos
-% %neigbor
-% %mem
-% %hopRank
-% for k=1:nodeNum
-%     nodes(k).id = k;
-%     nodes(k).pos = randi(area_width,1,2);
-%     nodes(k).neigborNum = 0;%具体的邻结点在通信过程中更新，这个属性是为使访问不出界。
-%     
-%     tmp = zeros(1,nodeNum);
-%     tmp(k) = 1;
-%     nodes(k).mem = ones(nodeMemSize,1)*tmp;%第k个行向量，代表第k个mem上存储的包的系数向量。
-%     nodes(k).hopRank = -1;
-% end
-% nodes(1).pos = [0,0];%将sink放在左下角
-% end
 
 function simu_context = construct_phy_NBor_map(simu_context)
     nodes = simu_context.nodes;

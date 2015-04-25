@@ -21,8 +21,8 @@ classdef randStrLineWalker < handle
     
    methods
        function walker = randStrLineWalker(xleft_arg,xright_arg,yup_arg,ydown_arg,step_size_arg)
-           %由于网络拓扑是旋转对称的，因此在任意一条边出发都是一样的。
-           walker.pos_curr = [xleft_arg + rand()*(xright_arg - xleft_arg), 0];
+           %为了引入随机性，出发点也地面
+           walker.pos_curr = [xleft_arg + rand()*(xright_arg - xleft_arg), ydown_arg + rand()*(ydown_arg - ydown_arg)];
            
            rand_angle = pi*rand();
            walker.step_move = step_size_arg*[cos(rand_angle) sin(rand_angle)];

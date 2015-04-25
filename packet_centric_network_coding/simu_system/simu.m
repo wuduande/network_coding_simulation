@@ -1,11 +1,11 @@
-function [simu_context is_exit_0] = system_setout(simu_context)
+function [simu_context is_exit_0] = simu(N,gen)
 %启动仿真系统，按指定参数（N，distribustion）进行仿真
 %此仿真，假设丢包率为0
-simu_context = system_init(simu_context);%初始化场景。这个必须放在其它参数配置好了以后。
-nodeNum = simu_context.nodeNum;
-simu_context.is_code_finished = 1;
+simu_context = get_simu_context(N);%N并不是仿真时真实采用的结点数。为了呈现矩形区域，会稍微变量节点数。
+simu_context = simu_init(simu_context,gen);%初始化场景。这个必须放在其它参数配置好了以后。
 
-% draw_situation( nodes,nodeNum,simu_context.phyNBorMap );
+nodeNum = simu_context.nodeNum;
+
 round_count = 1;
 while(1)
     sequence = randperm(nodeNum);
