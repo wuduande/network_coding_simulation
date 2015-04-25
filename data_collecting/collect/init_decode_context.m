@@ -1,5 +1,5 @@
-function init_decode_context()
-global decode_context nodeNum;
+function decode_context = init_decode_context(context)
+nodeNum = context.nodeNum;
 %初始化解码环境
 decode_context.k = floor(0.98*nodeNum);
 decode_context.is_finished = 0;

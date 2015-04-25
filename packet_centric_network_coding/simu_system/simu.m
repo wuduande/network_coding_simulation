@@ -1,7 +1,7 @@
-function [simu_context is_exit_0] = simu(N,gen)
+function [simu_context is_exit_0] = simu(N,tau,gen)
 %启动仿真系统，按指定参数（N，distribustion）进行仿真
 %此仿真，假设丢包率为0
-simu_context = get_simu_context(N);%N并不是仿真时真实采用的结点数。为了呈现矩形区域，会稍微变量节点数。
+simu_context = get_simu_context(N,tau);%N并不是仿真时真实采用的结点数。为了呈现矩形区域，会稍微变量节点数。
 simu_context = simu_init(simu_context,gen);%初始化场景。这个必须放在其它参数配置好了以后。
 
 nodeNum = simu_context.nodeNum;

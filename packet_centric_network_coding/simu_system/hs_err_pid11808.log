@@ -1,11 +1,11 @@
 #
 # An unexpected error has been detected by Java Runtime Environment:
 #
-#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x0f374cde, pid=19312, tid=12992
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x0c9b4cde, pid=11808, tid=19500
 #
 # Java VM: Java HotSpot(TM) Client VM (10.0-b19 mixed mode windows-x86)
 # Problematic frame:
-# C  0x0f374cde
+# C  0x0c9b4cde
 #
 # If you would like to submit a bug report, please visit:
 #   http://java.sun.com/webapps/bugreport/crash.jsp
@@ -15,33 +15,33 @@
 
 ---------------  T H R E A D  ---------------
 
-Current thread (0x0a7edc00):  JavaThread "AWT-Windows" daemon [_thread_in_native, id=12992, stack(0x0b140000,0x0b1c0000)]
+Current thread (0x0abed800):  JavaThread "AWT-Windows" daemon [_thread_in_native, id=19500, stack(0x0b2f0000,0x0b370000)]
 
 siginfo: ExceptionCode=0xc0000005, reading address 0x00000024
 
 Registers:
-EAX=0x00000000, EBX=0x0b1bf584, ECX=0x00000000, EDX=0x77347074
-ESP=0x0b1bf550, EBP=0x00000000, ESI=0x0e2e8f08, EDI=0x0e2e8f08
-EIP=0x0f374cde, EFLAGS=0x00010246
+EAX=0x00000000, EBX=0x0b36f714, ECX=0x00000000, EDX=0x77347074
+ESP=0x0b36f6e0, EBP=0x00000000, ESI=0x0011f310, EDI=0x0011f310
+EIP=0x0c9b4cde, EFLAGS=0x00010246
 
-Top of Stack: (sp=0x0b1bf550)
-0x0b1bf550:   72467725 fffffffe 770e50e8 0f376ffc
-0x0b1bf560:   00280d08 0000c23a 00000000 0f377016
-0x0b1bf570:   0000c23a 0e2e8f08 0b1bf7e0 770e61b8
-0x0b1bf580:   7ff9a6cc 00000000 0f3d30b3 0e2e8f08
-0x0b1bf590:   00280d08 0000c23a 00000000 00000000
-0x0b1bf5a0:   0000c23a 00280d08 770e61b8 000007f1
-0x0b1bf5b0:   0e2e8f08 0b1bf5f4 770de1a9 00030000
-0x0b1bf5c0:   00980000 0b1bf650 770de1bb 0e53d221 
+Top of Stack: (sp=0x0b36f6e0)
+0x0b36f6e0:   000007f1 0011f310 00000000 0c9b6eea
+0x0b36f6f0:   0c471430 0011f310 00000000 0c9b7016
+0x0b36f700:   000007f1 0011f310 0b36f970 770e61b8
+0x0b36f710:   770ec5fe 00000000 0ca130b3 0011f310
+0x0b36f720:   00481806 000007f1 00000000 00000000
+0x0b36f730:   000007f1 00481806 770e61b8 ffff1b37
+0x0b36f740:   0011f310 77102bee ffff1b37 000b1d48
+0x0b36f750:   0000c23a 00000000 00000000 00000001 
 
-Instructions: (pc=0x0f374cde)
-0x0f374cce:   c4 3f 0f 85 c0 75 1f 8b 4e 0c 88 86 c0 08 00 00
-0x0f374cde:   39 41 24 74 11 8b 56 08 50 50 68 f0 07 00 00 52 
+Instructions: (pc=0x0c9b4cde)
+0x0c9b4cce:   c4 a3 0c 85 c0 75 1f 8b 4e 0c 88 86 c0 08 00 00
+0x0c9b4cde:   39 41 24 74 11 8b 56 08 50 50 68 f0 07 00 00 52 
 
 
-Stack: [0x0b140000,0x0b1c0000],  sp=0x0b1bf550,  free space=509k
+Stack: [0x0b2f0000,0x0b370000],  sp=0x0b36f6e0,  free space=509k
 Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
-C  0x0f374cde
+C  0x0c9b4cde
 
 [error occurred during error reporting (printing native stack), id 0xc0000005]
 
@@ -54,44 +54,47 @@ v  ~BufferBlob::StubRoutines (1)
 ---------------  P R O C E S S  ---------------
 
 Java Threads: ( => current thread )
-  0x0af51400 JavaThread "Active Reference Queue Daemon" daemon [_thread_blocked, id=19368, stack(0x0edc0000,0x0ee40000)]
-  0x0af52000 JavaThread "Timer-87" daemon [_thread_blocked, id=22092, stack(0x0e2f0000,0x0e370000)]
-  0x0af51800 JavaThread "Thread-72" [_thread_blocked, id=5756, stack(0x0b800000,0x0b880000)]
-  0x0af52400 JavaThread "Timer-32" [_thread_blocked, id=6876, stack(0x063c0000,0x06440000)]
-  0x0af50c00 JavaThread "Prefs Updater" [_thread_blocked, id=11668, stack(0x060a0000,0x06120000)]
-  0x0af50000 JavaThread "Timer-8" daemon [_thread_blocked, id=18872, stack(0x0de50000,0x0ded0000)]
-  0x0adc8400 JavaThread "Timer-1" [_thread_blocked, id=10568, stack(0x0c0b0000,0x0c130000)]
-  0x0ab53400 JavaThread "TimerQueue" daemon [_thread_blocked, id=4692, stack(0x0bd90000,0x0be10000)]
-  0x0ab35800 JavaThread "AWT-EventQueue-0" [_thread_in_native, id=16436, stack(0x0bd10000,0x0bd90000)]
-  0x0ab54000 JavaThread "AWT-Shutdown" [_thread_blocked, id=15292, stack(0x0b0c0000,0x0b140000)]
-=>0x0a7edc00 JavaThread "AWT-Windows" daemon [_thread_in_native, id=12992, stack(0x0b140000,0x0b1c0000)]
-  0x0a7eb000 JavaThread "Java2D Disposer" daemon [_thread_blocked, id=20136, stack(0x0b040000,0x0b0c0000)]
-  0x0a1adc00 JavaThread "Timer-0" [_thread_blocked, id=9908, stack(0x0a370000,0x0a3f0000)]
-  0x0a1ad400 JavaThread "JMI Unnamed Thread" [_thread_in_native, id=16904, stack(0x039a0000,0x041a0000)]
-  0x06566000 JavaThread "Low Memory Detector" daemon [_thread_blocked, id=17736, stack(0x098f0000,0x09970000)]
-  0x0655f400 JavaThread "CompilerThread0" daemon [_thread_blocked, id=6864, stack(0x090f0000,0x098f0000)]
-  0x06556c00 JavaThread "Attach Listener" daemon [_thread_blocked, id=20416, stack(0x09070000,0x090f0000)]
-  0x0653f800 JavaThread "Finalizer" daemon [_thread_blocked, id=20720, stack(0x06780000,0x06800000)]
-  0x0653b400 JavaThread "Reference Handler" daemon [_thread_blocked, id=10720, stack(0x06700000,0x06780000)]
-  0x065ad000 JavaThread "main" [_thread_in_native, id=18464, stack(0x00430000,0x00c30000)]
+  0x0b13f400 JavaThread "Thread-743" [_thread_blocked, id=20012, stack(0x0e2d0000,0x0e350000)]
+  0x0b13f000 JavaThread "Thread-248" [_thread_blocked, id=9652, stack(0x0bec0000,0x0bf40000)]
+  0x0b13d400 JavaThread "Thread-135" [_thread_blocked, id=2376, stack(0x0d640000,0x0d6c0000)]
+  0x0b13e400 JavaThread "Thread-126" [_thread_blocked, id=14292, stack(0x0d330000,0x0d3b0000)]
+  0x0b13c800 JavaThread "Thread-104" [_thread_blocked, id=7588, stack(0x0b410000,0x0b490000)]
+  0x0b13bc00 JavaThread "Prefs Updater" [_thread_blocked, id=18464, stack(0x0d230000,0x0d2b0000)]
+  0x0b13a400 JavaThread "Active Reference Queue Daemon" daemon [_thread_blocked, id=20664, stack(0x0d0e0000,0x0d160000)]
+  0x0b13a000 JavaThread "Timer-10" daemon [_thread_blocked, id=9540, stack(0x0d060000,0x0d0e0000)]
+  0x0b139800 JavaThread "Timer-9" daemon [_thread_blocked, id=18228, stack(0x0c760000,0x0c7e0000)]
+  0x0af53400 JavaThread "Timer-1" [_thread_blocked, id=19652, stack(0x0c200000,0x0c280000)]
+  0x0ad30c00 JavaThread "TimerQueue" daemon [_thread_blocked, id=1916, stack(0x0be40000,0x0bec0000)]
+  0x0accb400 JavaThread "AWT-EventQueue-0" [_thread_in_native, id=17996, stack(0x0bd30000,0x0bdb0000)]
+  0x0accb000 JavaThread "AWT-Shutdown" [_thread_blocked, id=15876, stack(0x0b6b0000,0x0b730000)]
+=>0x0abed800 JavaThread "AWT-Windows" daemon [_thread_in_native, id=19500, stack(0x0b2f0000,0x0b370000)]
+  0x0abd3000 JavaThread "Java2D Disposer" daemon [_thread_blocked, id=11704, stack(0x0b1f0000,0x0b270000)]
+  0x0a42c000 JavaThread "Timer-0" [_thread_blocked, id=12096, stack(0x08ae0000,0x08b60000)]
+  0x0a417c00 JavaThread "JMI Unnamed Thread" [_thread_in_native, id=5424, stack(0x03ae0000,0x042e0000)]
+  0x06764000 JavaThread "Low Memory Detector" daemon [_thread_blocked, id=11320, stack(0x08a60000,0x08ae0000)]
+  0x0675d400 JavaThread "CompilerThread0" daemon [_thread_blocked, id=19404, stack(0x093f0000,0x09bf0000)]
+  0x06750c00 JavaThread "Attach Listener" daemon [_thread_blocked, id=17984, stack(0x089e0000,0x08a60000)]
+  0x0673c000 JavaThread "Finalizer" daemon [_thread_blocked, id=16280, stack(0x06920000,0x069a0000)]
+  0x0673b000 JavaThread "Reference Handler" daemon [_thread_blocked, id=3836, stack(0x068a0000,0x06920000)]
+  0x0681d000 JavaThread "main" [_thread_in_native, id=13440, stack(0x00430000,0x00c30000)]
 
 Other Threads:
-  0x06536c00 VMThread [stack: 0x08870000,0x09070000] [id=7580]
-  0x06578800 WatcherThread [stack: 0x09970000,0x0a170000] [id=22256]
+  0x06736c00 VMThread [stack: 0x08bf0000,0x093f0000] [id=18248]
+  0x06776800 WatcherThread [stack: 0x09bf0000,0x0a3f0000] [id=9712]
 
 VM state:not at safepoint (normal execution)
 
 VM Mutex/Monitor currently owned by a thread: None
 
 Heap
- def new generation   total 29504K, used 21868K [0x10010000, 0x12010000, 0x12010000)
-  eden space 26240K,  79% used [0x10010000, 0x11476aa8, 0x119b0000)
-  from space 3264K,  29% used [0x11ce0000, 0x11dd4848, 0x12010000)
-  to   space 3264K,   0% used [0x119b0000, 0x119b0000, 0x11ce0000)
- tenured generation   total 98304K, used 69972K [0x12010000, 0x18010000, 0x18010000)
-   the space 98304K,  71% used [0x12010000, 0x164651d0, 0x16465200, 0x18010000)
- compacting perm gen  total 35584K, used 35567K [0x18010000, 0x1a2d0000, 0x1c010000)
-   the space 35584K,  99% used [0x18010000, 0x1a2cbce8, 0x1a2cbe00, 0x1a2d0000)
+ def new generation   total 24896K, used 21349K [0x10010000, 0x11b10000, 0x12010000)
+  eden space 22144K,  93% used [0x10010000, 0x11433920, 0x115b0000)
+  from space 2752K,  26% used [0x11860000, 0x11915b68, 0x11b10000)
+  to   space 2752K,   0% used [0x115b0000, 0x115b0000, 0x11860000)
+ tenured generation   total 82572K, used 77715K [0x12010000, 0x170b3000, 0x18010000)
+   the space 82572K,  94% used [0x12010000, 0x16bf4fa0, 0x16bf5000, 0x170b3000)
+ compacting perm gen  total 33024K, used 32821K [0x18010000, 0x1a050000, 0x1c010000)
+   the space 33024K,  99% used [0x18010000, 0x1a01d500, 0x1a01d600, 0x1a050000)
 No shared spaces configured.
 
 Dynamic libraries:
@@ -183,18 +186,18 @@ Dynamic libraries:
 0x00ed0000 - 0x00f77000 	D:\R2009a\bin\win32\hgdatatypes.dll
 0x7ab70000 - 0x7ad89000 	D:\R2009a\bin\win32\uiw.dll
 0x7aee0000 - 0x7aee9000 	D:\R2009a\bin\win32\uinone.dll
-0x77840000 - 0x7794f000 	C:\Windows\WinSxS\x86_microsoft.vc80.mfc_1fc8b3b9a1e18e3b_8.0.50727.6195_none_cbf5e994470a1a8f\MFC80.DLL
-0x00fb0000 - 0x01001000 	C:\Windows\system32\WINSPOOL.DRV
+0x00fb0000 - 0x010bf000 	C:\Windows\WinSxS\x86_microsoft.vc80.mfc_1fc8b3b9a1e18e3b_8.0.50727.6195_none_cbf5e994470a1a8f\MFC80.DLL
+0x010c0000 - 0x01111000 	C:\Windows\system32\WINSPOOL.DRV
 0x771a0000 - 0x772fc000 	C:\Windows\system32\ole32.dll
 0x75510000 - 0x7559f000 	C:\Windows\system32\OLEAUT32.dll
 0x79ae0000 - 0x79b55000 	D:\R2009a\bin\win32\udd_mi.dll
 0x78740000 - 0x78753000 	D:\R2009a\bin\win32\mwoles05.DLL
 0x79820000 - 0x79864000 	D:\R2009a\bin\win32\comcli.dll
-0x01040000 - 0x0105b000 	C:\Windows\WinSxS\x86_microsoft.vc80.atl_1fc8b3b9a1e18e3b_8.0.50727.6195_none_d1cb102c435421de\ATL80.DLL
+0x01150000 - 0x0116b000 	C:\Windows\WinSxS\x86_microsoft.vc80.atl_1fc8b3b9a1e18e3b_8.0.50727.6195_none_d1cb102c435421de\ATL80.DLL
 0x7ae90000 - 0x7ae9b000 	D:\R2009a\bin\win32\mlautoregister.dll
 0x76c00000 - 0x76c1f000 	C:\Windows\system32\IMM32.DLL
 0x77000000 - 0x770cc000 	C:\Windows\system32\MSCTF.dll
-0x72cd0000 - 0x72cda000 	C:\Windows\WinSxS\x86_microsoft.vc80.mfcloc_1fc8b3b9a1e18e3b_8.0.50727.6195_none_03ce2c72205943d3\MFC80CHS.DLL
+0x011b0000 - 0x011ba000 	C:\Windows\WinSxS\x86_microsoft.vc80.mfcloc_1fc8b3b9a1e18e3b_8.0.50727.6195_none_03ce2c72205943d3\MFC80CHS.DLL
 0x738c0000 - 0x73900000 	C:\Windows\system32\uxtheme.dll
 0x74fb0000 - 0x74fbb000 	C:\Windows\system32\profapi.dll
 0x74220000 - 0x7423c000 	C:\Windows\system32\iphlpapi.dll
@@ -206,7 +209,7 @@ Dynamic libraries:
 0x74ea0000 - 0x74eac000 	C:\Windows\system32\CRYPTBASE.dll
 0x79190000 - 0x793e0000 	D:\R2009a\sys\java\jre\win32\jre\bin\client\jvm.dll
 0x75340000 - 0x75372000 	C:\Windows\system32\WINMM.dll
-0x02fc0000 - 0x03016000 	D:\R2009a\bin\win32\MSVCR71.dll
+0x043e0000 - 0x04436000 	D:\R2009a\bin\win32\MSVCR71.dll
 0x74e50000 - 0x74e9c000 	C:\Windows\system32\apphelp.dll
 0x732b0000 - 0x7339b000 	C:\Windows\system32\dbghelp.dll
 0x79920000 - 0x79928000 	D:\R2009a\sys\java\jre\win32\jre\bin\hpi.dll
@@ -218,11 +221,11 @@ Dynamic libraries:
 0x7aed0000 - 0x7aed6000 	D:\R2009a\bin\win32\nativeservices.dll
 0x78fc0000 - 0x790ee000 	D:\R2009a\sys\java\jre\win32\jre\bin\awt.dll
 0x75320000 - 0x75333000 	C:\Windows\system32\dwmapi.dll
-0x06690000 - 0x0669f000 	C:\Users\Administrator\AppData\Local\Youdao\Dict\Application\6.3.66.3251\WordStrokeHelper32.dll
-0x0b1c0000 - 0x0b250000 	C:\Users\Administrator\AppData\Roaming\TaobaoProtect\TaobaoProtectSE.dll
+0x0b370000 - 0x0b403000 	C:\Users\Administrator\AppData\Roaming\TaobaoProtect\TaobaoProtectSE.dll
+0x751c0000 - 0x752e1000 	C:\Windows\system32\CRYPT32.dll
+0x74fc0000 - 0x74fcc000 	C:\Windows\system32\MSASN1.dll
 0x74500000 - 0x74509000 	C:\Windows\system32\VERSION.dll
-0x799c0000 - 0x79a13000 	D:\R2009a\sys\java\jre\win32\jre\bin\fontmanager.dll
-0x787e0000 - 0x787f3000 	D:\R2009a\sys\java\jre\win32\jre\bin\net.dll
+0x03140000 - 0x03143000 	C:\Windows\system32\sfc.dll
 
 VM Arguments:
 jvm_args: -Xss512k -XX:PermSize=32m -Xms64m -XX:NewRatio=3 -XX:MaxPermSize=64m -Xmx128m -XX:MaxDirectMemorySize=1200000000 -Dsun.java2d.noddraw=true -Dsun.awt.nopixfmt=true -Xshare:off -Xrs -Djava.library.path=D:\R2009a\bin\win32;D:\Xilinx\12.4\ISE_DS\ISE\sysgen\bin;D:\Xilinx\12.4\ISE_DS\ISE\sysgen\bin\nt vfprintf abort 
@@ -245,10 +248,10 @@ OS: Windows NT 6.1 Build 7601 Service Pack 1
 
 CPU:total 4 (4 cores per cpu, 1 threads per core) family 6 model 7 stepping 10, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3
 
-Memory: 4k page, physical 3632736k(1370608k free), swap 4194303k(3448956k free)
+Memory: 4k page, physical 3632736k(962892k free), swap 4194303k(2409520k free)
 
 vm_info: Java HotSpot(TM) Client VM (10.0-b19) for windows-x86 JRE (1.6.0_04-b12), built on Dec 14 2007 00:51:20 by "java_re" with MS VC++ 7.1
 
-time: Tue Apr 21 18:33:33 2015
-elapsed time: 6401 seconds
+time: Sun Apr 26 00:02:54 2015
+elapsed time: 2074 seconds
 

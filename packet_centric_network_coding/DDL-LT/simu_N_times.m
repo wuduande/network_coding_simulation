@@ -1,8 +1,9 @@
 function simu_N_times(N,tau,dg,simu_times)
 %AUTO_SIMU 设定在一次作业中，为参数N设定多少种度分布分别进行仿真
 %   Detailed explanation goes here
-addpath('../rateless_coding');
-addpath('../lib');
+addpath('../../rateless_coding');
+addpath('../../lib');
+addpath('../simu_system');
 
 switch(N)
     case 50
@@ -19,22 +20,23 @@ switch(N)
         p1 = 0.248577936;
 end
 
-type = 'degree_limit_opt';
-distribution = getDistribution( N,'degree_limit',p1,dg );
-gen = DegreeGenerater(distribution);
+type = 'ddllt';
+distribution = getDistribution( N,type,p1,dg );
+gen = DegreeGenerator(distribution);
 
+results = cell(1,simu_times);
 parfor indx = 1:simu_times
-    save_file_name = build_degree_limit_data_file_name(N,type,indx,tau,dg);
-    if exist(save_file_name,'file')
-        continue;
-    end
+%     save_file_names{indx} = build_ddllt_data_file_name(N,tau,dg,indx);
+%     if exist(save_file_names{indx},'file')
+%         continue;
+%     end
     
-    [simu_context is_succ] = simu(N,gen);
-
-    if is_succ
-        save(save_file_name, 'simu_context');
-    end
+    [results{indx} is_succ] = simu(N,tau,gen);
 end
 
-
+path = '../../result_data/';
+for indx = 1:simu_times
+    context = results{indx};
+    save([path, build_ddllt_data_file_name(N,tau,dg,indx)], 'context');
+end
 end

@@ -5,7 +5,7 @@ function simu_context = simu_init(simu_context,gen)
 addpath('../../lib/data_structure');
 addpath('lib');
 %<global init>
-simu_context = put_nodes_in_grid(simu_context);
+simu_context = put_nodes_in_grid(simu_context,gen);
 simu_context = construct_phy_NBor_map(simu_context);
 
 %全局控制信号
@@ -17,27 +17,24 @@ end
 %refuse reception threshold:当缓存占用多少时，拒绝接收新包
 %code redundence:每个符号生成多少个重复码包
 %
-function simu_context = put_nodes_in_grid(simu_context)
+function simu_context = put_nodes_in_grid(simu_context,gen)
 %目标功能：
 %在尽可能接近正方形的平面空间内，按照预定密度放置所有结点。为此，可以稍微修改节点的总数。
 %要求网络为网格拓扑。
 %要求结点被初始化，生成目标度各不相同，但含有相同原始符号的码包。
     nx = simu_context.nx;
-    ny = simu_context.ny;
     nodeNum = simu_context.nodeNum;
     code_redundence = simu_context.code_redundence;
-    comRange = simu_context.comRange;
-    sensor_density = simu_context.sensor_density;
     grid_width = simu_context.grid_width;
     tau = simu_context.tau;
 
     for k=1:nodeNum
-        nodes(k).id = k;
+        simu_context.nodes(k).id = k;
         
         %设定位置
         x = mod(k-1,nx)*grid_width;
         y = floor((k-1)/nx)*grid_width;
-        nodes(k).pos = [x,y];
+        simu_context.nodes(k).pos = [x,y];
         
         %<初始化码包>-----------------------------------------------
         %--下一次编码前，还需传输的跳数
@@ -55,15 +52,14 @@ function simu_context = put_nodes_in_grid(simu_context)
             pack.left_degree = int32(gen.next() - 1);%还需编入的符号分量数
             ListInsert(list, pack);
         end
-        nodes(k).coding_mems = list;
+        simu_context.nodes(k).coding_mems = list;
         %--初始化“已完成编码码包”链表
-        nodes(k).code_finished_mems = doubleLinkedList();
+        simu_context.nodes(k).code_finished_mems = doubleLinkedList();
         %</初始化码包>---------------------------------------------
 
-        nodes(k).is_busy = 0;%used to media access control
-        nodes(k).is_collected = 0;
+        simu_context.nodes(k).is_busy = 0;%used to media access control
+        simu_context.nodes(k).is_collected = 0;
     end
-    simu_context.nodes = nodes;
 end
 
 function simu_context = construct_phy_NBor_map(simu_context)

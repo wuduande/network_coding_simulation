@@ -1,0 +1,17 @@
+function MAIN_job_schedule()
+%MAIN_JOB Summary of this function goes here
+%   Èë¿Ú
+addpath('collect');
+N = [100 200 300 400 500];
+tau = 5;
+sample
+path = '../result_data/';
+%ddllt curve
+for indx = 1:5
+file = build_ddllt_data_file_name_without_indx( N(indx),tau,dg);
+file = [path file];
+cost_collect(file,100);
+end
+%lt curve
+
+end

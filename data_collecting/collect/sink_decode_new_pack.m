@@ -1,7 +1,8 @@
-function sink_decode_new_pack(new_pack)
+function decode_context = sink_decode_new_pack(context,decode_context,new_pack)
 %MAIN 按需解码，内部有解码状态机。
 %   Detailed explanation goes here
-global decode_context nodeNum;
+nodeNum = context.nodeNum;
+
 %%
 %仿真开始
 new_code = new_pack.coeffs;
@@ -29,7 +30,7 @@ next = 1;
 while next <= col
     next_code_indx = decode_context.decoded_unprocessed(next);
     decode_context.codes_registered_to_reduce = decode_context.future_decode_register{next_code_indx};
-    [decode_context.decoded_unprocessed,decode_context.undecoded_codes] = reduce(next_code_indx,decode_context.codes_registered_to_reduce,decode_context.decoded_unprocessed,decode_context.undecoded_codes);
+    [decode_context] = reduce(decode_context,next_code_indx);
     decode_context.decoded_processed(next_code_indx) = 1;
     %update states
     next = next + 1;
@@ -44,11 +45,13 @@ if(sum(decode_context.decoded_processed) >= decode_context.k)
 end
 end
 
-function [decoded_unprocessed,undecoded_codes] = reduce(origin_code_indx,undecoded_to_reduce_indx,decoded_unprocessed,undecoded_codes)
-    global decode_context;
-    [row,col] = size(undecoded_to_reduce_indx);
+function [decode_context] = reduce(decode_context,origin_code_indx)
+decoded_unprocessed = decode_context.decoded_unprocessed;
+undecoded_codes = decode_context.undecoded_codes;
+
+    [row,col] = size(decode_context.codes_registered_to_reduce);
     for indx = 1:col
-        curr = undecoded_to_reduce_indx(indx);
+        curr = decode_context.codes_registered_to_reduce(indx);
         undecoded_codes(curr,origin_code_indx) = 0;
         if sum(undecoded_codes(curr,:)) == 1%如果解出来此码
             new_code_indx = decode_context.indx_table(boolean(undecoded_codes(curr,:)));
@@ -60,4 +63,7 @@ function [decoded_unprocessed,undecoded_codes] = reduce(origin_code_indx,undecod
             undecoded_codes(curr,:) = 0;
         end
     end
+
+decode_context.decoded_unprocessed = decoded_unprocessed;
+decode_context.undecoded_codes = undecoded_codes;
 end
