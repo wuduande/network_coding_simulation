@@ -8,10 +8,7 @@ function [is_successfull statis] = sink_collect(context,M_rate)
 %   注意事项：
 %   1.在衡量解码性能时，网络仿真中，是否可以绘制随解码率变化的平均代价图。
 %   2.一次编码的数据，可以通过收集的随机性多次利用。
-statis = 10;
-is_successfull = 1;
-return;
-addpath('../../lib');
+addpath('data_collecting\collect\');
 
 [decode_context context] = init_collect(context);
 nodeNum = context.nodeNum;
@@ -32,7 +29,7 @@ walker = randStrLineWalker(0,grid_width*nx,grid_width*ny,0,comRange);%前进的步长
 while ~decode_context.is_finished
     pos = walker.move();
     node_list = getNodesInCircle(context,pos(1),pos(2),comRange);
-    [context decode_context statis] = retrieve_data(context,decode_context,node_list,recv_bound);
+    [context decode_context] = retrieve_data(context,decode_context,node_list,recv_bound);
     
     if decode_context.receive_counter >= recv_bound
         break;

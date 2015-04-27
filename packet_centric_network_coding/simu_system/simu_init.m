@@ -2,7 +2,7 @@ function simu_context = simu_init(simu_context,gen)
 %INIT_SIMU 为仿真系统初始化仿真场景。
 %  包括：结点结点数据、仿真系统所要用到地图。
 %初始化结点
-addpath('../../lib/data_structure');
+addpath('lib/data_structure');
 addpath('lib');
 %<global init>
 simu_context = put_nodes_in_grid(simu_context,gen);

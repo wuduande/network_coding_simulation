@@ -3,12 +3,13 @@ function [ cost,av_hop,max_hop ] = cost_collect( filename_without_indx,sample_nu
 %   this func is used to get the cost when decoding is successful
 
     cost = 0;
-    av_hop = 0;
     max_hop = 0;
     statis_sample_num = 0;
+    hop_count = 0;
     for indx = 1:sample_num
-        context = load([filename_without_indx, '_indx_', num2str(indx), '.mat'],'context');
+        load([filename_without_indx, '_indx_', num2str(indx), '.mat'],'context');
         recorder = cell(1,100);
+        context.k = ceil(0.98*context.nodeNum);
         parfor j = 1:100
             [tmp recorder{j}]= sink_collect(context,-1);
         end
@@ -30,7 +31,7 @@ function [ cost,av_hop,max_hop ] = cost_collect( filename_without_indx,sample_nu
         indx
     end
     cost = cost/(100*sample_num);
-    av_hop = av_hop/statis_sample_num;%在所有仿真的每个包中平均。
+    av_hop = hop_count/statis_sample_num;%在所有仿真的每个包中平均。
     max_hop = max_hop/(sample_num);
 end
 
