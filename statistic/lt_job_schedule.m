@@ -1,5 +1,5 @@
 %% lt_job: function description
-function [out] = lt_job()
+function [out] = lt_job_schedule()
 	N = [100 200 300 400 500];
 	tau = 27;
 	simu_data_num = 100;
